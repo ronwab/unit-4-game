@@ -5,6 +5,7 @@ $(document).ready(function() {
   var crystal3 = 0;
   var crystal4 = 0;
   var crystalTotal = 0;
+  var count2 = 0;
 
   function displaycrystalValues() {
     $("#btn1").text(crystal1);
@@ -34,7 +35,6 @@ $(document).ready(function() {
   function generateRandomNumber() {
     $("#btnPlayGame").on("click", () => {
       randomNumber = Math.round(Math.random() * 101 + 19);
-
       $("#displayRandomNum").text(randomNumber);
     });
     generateCrytalNumbers();
@@ -44,44 +44,60 @@ $(document).ready(function() {
   //generate four random numbers for the four Crytals
   function generateCrytalNumbers() {
     $("#btnPlayGame").on("click", () => {
-      crystal1 = Math.round(Math.random() * 101 + 19);
-      crystal2 = Math.round(Math.random() * 101 + 19);
-      crystal3 = Math.round(Math.random() * 101 + 19);
-      crystal4 = Math.round(Math.random() * 101 + 19);
-
+      crystal1 = Math.round(Math.random() * 12);
+      crystal2 = Math.round(Math.random() * 12);
+      crystal3 = Math.round(Math.random() * 12);
+      crystal4 = Math.round(Math.random() * 12);
       displaycrystalValues();
+      console.log(typeof crystal1); //to check that it is a number.
     });
   }
 
   //if user clicks crystal add the value and display total value.
   function computeCrystalValues() {
-    if(crystalTotal <randomNumber) {
-      var clickcrystal1 = $("#btn1").on("click", e => {
-        var count1 = parseInt(e.target.textContent);
-  
-        console.log(count1);
-      }); ||
-      var clickcrystal2 = $("#btn2").on("click", e => {
-        var count2 = parseInt(e.target.textContent);
-  
-        console.log(count2);
-      });
-      var clickcrystal3 = $("#btn3").on("click", e => {
-        var count3 = parseInt(e.target.textContent);
-  
-        console.log(count3);
-      });
-      var clickcrystal4 = $("#btn4").on("click", e => {
-        var count4 = parseInt(e.target.textContent);
-  
-        console.log(count4);
-      });
-    }
-    
+    $("#btn1").click(() => {
+      if (randomNumber > crystalTotal) {
+        crystalTotal += crystal1;
+        console.log(crystalTotal);
+      } else if ((randomNumber = crystalTotal)) {
+        console.log("You Win!");
+      } else {
+        console.log("YOU LOSE");
+      }
+    });
 
-    // if(clickcrystal1 || clickcrystal2 || clickcrystal3 || clickcrystal4){
-    //   count
-    // }
+    $("#btn2").click(() => {
+      // crystal2 = parseInt(e.target.textContent);
+
+      if (randomNumber >= crystalTotal) {
+        crystalTotal += crystal2;
+        console.log(crystalTotal);
+      } else {
+        console.log("YOU LOSE");
+      }
+    });
+
+    $("#btn3").click(() => {
+      // crystal3 = parseInt(e.target.textContent);
+
+      if (randomNumber >= crystalTotal) {
+        crystalTotal += crystal3;
+        console.log(crystalTotal);
+      } else {
+        console.log("YOU LOSE");
+      }
+    });
+
+    $("#btn4").click(() => {
+      // crystal4 = parseInt(e.target.textContent);
+
+      if (randomNumber >= crystalTotal) {
+        crystalTotal += crystal4;
+        console.log(crystalTotal);
+      } else {
+        console.log("YOU LOSE");
+      }
+    });
   }
   computeCrystalValues();
 });
