@@ -21,12 +21,3 @@
 //        return  2+4 ;
 
 // }
-
-var a = 0;
-
-count = 9;
-
-if (count > a) {
-  a++;
-  console.log(`a inside loop ${a}`);
-}
