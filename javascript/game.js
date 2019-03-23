@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   var randomNumber = 0;
   var crystal1 = 0;
   var crystal2 = 0;
@@ -6,6 +6,8 @@ $(document).ready(function() {
   var crystal4 = 0;
   var crystalTotal = 0;
   var count2 = 0;
+  wins = 0;
+  losses = 0;
 
   function displaycrystalValues() {
     $("#btn1").text(crystal1);
@@ -29,7 +31,6 @@ $(document).ready(function() {
       alert("Click to restart game");
     });
   }
-  resetGame();
 
   //generate computer number
   function generateRandomNumber() {
@@ -49,55 +50,74 @@ $(document).ready(function() {
       crystal3 = Math.round(Math.random() * 12);
       crystal4 = Math.round(Math.random() * 12);
       displaycrystalValues();
-      console.log(typeof crystal1); //to check that it is a number.
+
     });
   }
 
   //if user clicks crystal add the value and display total value.
   function computeCrystalValues() {
     $("#btn1").click(() => {
+      crystalTotal += crystal1;
       if (randomNumber > crystalTotal) {
-        crystalTotal += crystal1;
-        console.log(crystalTotal);
-      } else if ((randomNumber = crystalTotal)) {
-        console.log("You Win!");
+
+        $("#displayScore").text(crystalTotal)
+      } else if (randomNumber === crystalTotal) {
+        win();
       } else {
-        console.log("YOU LOSE");
+        loss();
+        resetGame();
       }
     });
 
     $("#btn2").click(() => {
-      // crystal2 = parseInt(e.target.textContent);
-
+      crystalTotal += crystal2;
       if (randomNumber >= crystalTotal) {
-        crystalTotal += crystal2;
-        console.log(crystalTotal);
+        $("#displayScore").text(crystalTotal)
+      } else if (randomNumber === crystalTotal) {
+        win();
       } else {
-        console.log("YOU LOSE");
+        loss();
+        resetGame();
       }
     });
 
     $("#btn3").click(() => {
-      // crystal3 = parseInt(e.target.textContent);
-
+      crystalTotal += crystal3;
       if (randomNumber >= crystalTotal) {
-        crystalTotal += crystal3;
-        console.log(crystalTotal);
+        $("#displayScore").text(crystalTotal)
+      } else if (randomNumber === crystalTotal) {
+        win();
       } else {
-        console.log("YOU LOSE");
+        loss();
+        resetGame();
       }
     });
 
     $("#btn4").click(() => {
-      // crystal4 = parseInt(e.target.textContent);
-
+      crystalTotal += crystal4;
       if (randomNumber >= crystalTotal) {
-        crystalTotal += crystal4;
-        console.log(crystalTotal);
+        $("#displayScore").text(crystalTotal)
+      } else if (randomNumber === crystalTotal) {
+        win();
       } else {
-        console.log("YOU LOSE");
+        loss();
+        resetGame();
       }
     });
+  }
+
+  function win() {
+    alert("You won!");
+    wins++;
+    $("#numberWins").text(wins);
+    resetGame();
+  }
+  //addes the losses to the userTotal
+  function loss() {
+    alert("You lose!");
+    losses++;
+    $("#numberLosses").text(losses);
+    resetGame();
   }
   computeCrystalValues();
 });
